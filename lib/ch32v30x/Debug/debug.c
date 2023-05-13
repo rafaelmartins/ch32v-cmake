@@ -99,8 +99,7 @@ void USART_Printf_Init(uint32_t baudrate)
     GPIO_Init(GPIOA, &GPIO_InitStructure);
 
 #elif(DEBUG == DEBUG_UART2)
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2 | RCC_APB2Periph_GPIOA, ENABLE);
 
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -108,14 +107,15 @@ void USART_Printf_Init(uint32_t baudrate)
     GPIO_Init(GPIOA, &GPIO_InitStructure);
 
 #elif(DEBUG == DEBUG_UART3)
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3 | RCC_APB2Periph_GPIOB, ENABLE);
 
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
     GPIO_Init(GPIOB, &GPIO_InitStructure);
 
+#else
+#error "Invalid DEBUG_UART."
 #endif
 
     USART_InitStructure.USART_BaudRate = baudrate;
@@ -152,6 +152,7 @@ void USART_Printf_Init(uint32_t baudrate)
  */
 __attribute__((used)) int _write(int fd, char *buf, int size)
 {
+    (void) fd;
     int i;
 
     for(i = 0; i < size; i++)
@@ -178,7 +179,7 @@ __attribute__((used)) int _write(int fd, char *buf, int size)
  *
  * @return  size: Data length
  */
-void *_sbrk(ptrdiff_t incr)
+__attribute__((used)) void *_sbrk(ptrdiff_t incr)
 {
     extern char _end[];
     extern char _heap_end[];
@@ -190,6 +191,3 @@ void *_sbrk(ptrdiff_t incr)
     curbrk += incr;
     return curbrk - incr;
 }
-
-
-
