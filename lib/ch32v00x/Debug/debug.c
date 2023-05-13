@@ -119,6 +119,7 @@ void USART_Printf_Init(uint32_t baudrate)
 __attribute__((used))
 int _write(int fd, char *buf, int size)
 {
+    (void) fd;
     int i;
 
     for(i = 0; i < size; i++){
@@ -136,6 +137,7 @@ int _write(int fd, char *buf, int size)
  *
  * @return  size: Data length
  */
+__attribute__((used))
 void *_sbrk(ptrdiff_t incr)
 {
     extern char _end[];
@@ -148,6 +150,3 @@ void *_sbrk(ptrdiff_t incr)
     curbrk += incr;
     return curbrk - incr;
 }
-
-
-
