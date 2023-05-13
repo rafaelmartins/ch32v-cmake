@@ -21,7 +21,7 @@
 //#define SYSCLK_FREQ_8MHz_HSE    8000000
 //#define SYSCLK_FREQ_24MHz_HSE   HSE_VALUE
 //#define SYSCLK_FREQ_48MHz_HSE   48000000
-#ifdef CLK_FREQ_8MHz_HSI
+#ifdef CLK_FREQ_8MHZ_HSI
 #define SYSCLK_FREQ_8MHz_HSI 8000000
 #elif defined CLK_FREQ_24MHZ_HSI
 #define SYSCLK_FREQ_24MHZ_HSI HSI_VALUE
@@ -34,7 +34,7 @@
 #elif defined CLK_FREQ_48MHZ_HSE
 #define SYSCLK_FREQ_48MHz_HSE 48000000
 #else
-#error "No CLK_FREQ_*MHZ_HSE or CLK_FREQ_*MHZ_HSI defined."
+#error "No supported CLK_FREQ_*MHZ_HSE or CLK_FREQ_*MHZ_HSI defined."
 #endif
 
 /* Clock Definitions */

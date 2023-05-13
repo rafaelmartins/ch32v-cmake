@@ -58,7 +58,7 @@
 #elif defined CLK_FREQ_HSI
 // do nothing
 #else
-#error "No CLK_FREQ_*MHZ_HSE or CLK_FREQ_*MHZ_HSI defined."
+#error "No supported CLK_FREQ_*MHZ_HSE or CLK_FREQ_*MHZ_HSI defined."
 #endif
 
 /* Clock Definitions */
