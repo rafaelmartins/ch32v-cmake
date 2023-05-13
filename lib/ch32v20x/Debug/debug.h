@@ -24,9 +24,14 @@ extern "C" {
 #define DEBUG_UART3    3
 
 /* DEBUG UATR Definition */
-#define DEBUG          DEBUG_UART1
+//#define DEBUG   DEBUG_UART1
 //#define DEBUG   DEBUG_UART2
 //#define DEBUG   DEBUG_UART3
+#ifdef DEBUG_UART
+#define DEBUG DEBUG_UART
+#else
+#error "DEBUG_UART not defined."
+#endif
 
 void Delay_Init(void);
 void Delay_Us(uint32_t n);
