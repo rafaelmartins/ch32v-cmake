@@ -41,7 +41,7 @@ function(ch32v_target_set_device target mcu)
     )
 endfunction()
 
-function(ch32v_target_gen_map target)
+function(ch32v_target_generate_map target)
     target_link_options(${target} PRIVATE
         "-Wl,-Map,$<TARGET_FILE:${target}>.map"
     )
